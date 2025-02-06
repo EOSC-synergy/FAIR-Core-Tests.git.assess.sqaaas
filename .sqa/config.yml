@@ -1,0 +1,60 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/OSTrails/FAIR-Core-Tests:
+      branch: main
+      repo: https://github.com/OSTrails/FAIR-Core-Tests.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/OSTrails/FAIR-Core-Tests git:
+        commands:
+        - /usr/bin/env sh .sqa/script.scaly-indigo-eagle.sh
+        container: qc.acc_breezy-burgundy-kakapo
+  QC.Doc:
+    repos:
+      github.com/OSTrails/FAIR-Core-Tests find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-jade-dragonfly.sh
+        container: qc.doc_skanky-purple-meerkat
+      github.com/OSTrails/FAIR-Core-Tests git:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-champagne-manatee.sh
+        container: qc.doc_zippy-gold-gopher
+      github.com/OSTrails/FAIR-Core-Tests markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-mauve-binturong.sh
+        container: qc.doc_ready-fuchsia-budgerigar
+  QC.Lic:
+    repos:
+      github.com/OSTrails/FAIR-Core-Tests licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-violet-booby.sh
+        container: qc.lic_dorky-zucchini-lemur
+  QC.Sty:
+    repos:
+      github.com/OSTrails/FAIR-Core-Tests hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-viridian-chinook.sh
+        container: qc.sty_greasy-aquamarine-lobster
+      github.com/OSTrails/FAIR-Core-Tests jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-peach-fox.sh
+        container: qc.sty_squeaky-pink-pig
+      github.com/OSTrails/FAIR-Core-Tests rubocop:
+        commands:
+        - /usr/bin/env sh .sqa/script.snoopy-eggplant-rabbit.sh
+        container: qc.sty_surly-mustard-capybara
+  QC.Ver:
+    repos:
+      github.com/OSTrails/FAIR-Core-Tests get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-beige-kudu.sh
+        container: qc.ver_trippy-yellow-husky
+timeout: 5400
